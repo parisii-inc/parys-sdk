@@ -1,7 +1,7 @@
 {
-  "name": "@hai-on-op/sdk",
-  "version": "1.2.23",
-  "description": "Javascript client for HAI",
+  "name": "@parisii-inc/parys-sdk",
+  "version": "1.0.0",
+  "description": "Javascript client for PARYS",
   "license": "MIT",
   "main": "lib",
   "files": [
