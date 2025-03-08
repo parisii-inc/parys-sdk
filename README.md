@@ -134,3 +134,9 @@ const { stabilityFee } = await geb.contracts.taxCollector.collateralTypes(utils.
 const tx = geb.contracts.liquidationEngine.liquidateSAFE(utils.ETH_A,"0xdefidream...");
 await wallet.sendTransaction(tx)
 ```
+
+## Local Development with Custom Contracts
+
+We've added support for local development with custom contract addresses. This feature allows you to easily connect to contracts deployed on local networks like Anvil without modifying the SDK source code.
+
+See [LOCALNET.md](./LOCALNET.md) for detailed instructions on how to use this feature.

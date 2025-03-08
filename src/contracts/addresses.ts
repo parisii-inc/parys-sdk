@@ -21,6 +21,9 @@ import {
     APXETH,
     MOO_VELO_V2_OP_VELO,
 } from '../utils'
+import * as fs from 'fs'
+import * as path from 'path'
+import 'dotenv/config' // Load environment variables from .env file
 
 // All keys are mandatory
 export type ContractKey =
@@ -65,7 +68,7 @@ export type ContractList = {
     [key in ContractKey]: string
 }
 
-export declare type GebDeployment = 'mainnet' | 'optimism-goerli' | 'optimism-sepolia'
+export declare type GebDeployment = 'mainnet' | 'optimism-goerli' | 'optimism-sepolia' | 'localnet'
 
 const addresses: Record<GebDeployment, ContractList> = {
     mainnet: {
@@ -182,6 +185,44 @@ const addresses: Record<GebDeployment, ContractList> = {
         MERKLE_DISTRIBUTOR_FACTORY_OP: '0x524fE171e80173C15381bB50034033dA282abCc6',
         MERKLE_DISTRIBUTOR_FACTORY_DINERO: '0xFC4fD07b8CbA6b008952656a3d16A25da012EA56',
     },
+    'localnet': {
+        MULTICALL: '',
+        ETH: '',
+        GEB_SYSTEM_COIN: '',
+        GEB_PROTOCOL_TOKEN: '',
+        GEB_SAFE_ENGINE: '',
+        GEB_ORACLE_RELAYER: '',
+        GEB_SURPLUS_AUCTION_HOUSE: '',
+        GEB_DEBT_AUCTION_HOUSE: '',
+        GEB_COLLATERAL_AUCTION_HOUSE_FACTORY: '',
+        GEB_ACCOUNTING_ENGINE: '',
+        GEB_LIQUIDATION_ENGINE: '',
+        GEB_COIN_JOIN: '',
+        GEB_COLLATERAL_JOIN_FACTORY: '',
+        GEB_TAX_COLLECTOR: '',
+        GEB_STABILITY_FEE_TREASURY: '',
+        GEB_RRFM_CALCULATOR: '',
+        GEB_RRFM_SETTER: '',
+        GEB_GLOBAL_SETTLEMENT: '',
+        GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE: '',
+        GEB_POST_SETTLEMENT_SURPLUS_AUCTIONEER: '',
+        SAFE_MANAGER: '',
+        PROXY_FACTORY: '',
+        PROXY_BASIC_ACTIONS: '',
+        PROXY_DEBT_AUCTION_ACTIONS: '',
+        PROXY_SURPLUS_AUCTION_ACTIONS: '',
+        PROXY_COLLATERAL_AUCTION_ACTIONS: '',
+        PROXY_POST_SETTLEMENT_SURPLUS_AUCTION_ACTIONS: '',
+        PROXY_GLOBAL_SETTLEMENT_ACTIONS: '',
+        PROXY_REWARDED_ACTIONS: '',
+        JOB_ACCOUNTING: '',
+        JOB_LIQUIDATION: '',
+        JOB_ORACLES: '',
+        WRAPPED_TOKEN_HAI_VELO: '',
+        MERKLE_DISTRIBUTOR_FACTORY_KITE: '',
+        MERKLE_DISTRIBUTOR_FACTORY_OP: '',
+        MERKLE_DISTRIBUTOR_FACTORY_DINERO: '',
+    }
 }
 
 export type TokenData = {
@@ -246,7 +287,6 @@ const tokens: Record<GebDeployment, TokenList> = {
             isCollateral: true,
             hasRewards: false,
         },
-
         WBTC: {
             address: '0x68f180fcCe6836688e9084f035309E29Bf0A2095',
             decimals: 8,
@@ -291,19 +331,6 @@ const tokens: Record<GebDeployment, TokenList> = {
             isCollateral: true,
             hasRewards: false,
         },
-        /* TODO: uncomment if / after SUSD-A is deployed through governance
-        'SUSD-A': {
-            address: '0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9',
-            decimals: 18,
-            symbol: 'SUSD-A',
-            label: 'SUSD-A',
-            bytes32String: SUSD_A,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
         LINK: {
             address: '0x350a791Bfc2C21F9Ed5d10980Dad2e2638ffa7f6',
             decimals: 18,
@@ -315,32 +342,6 @@ const tokens: Record<GebDeployment, TokenList> = {
             isCollateral: true,
             hasRewards: false,
         },
-        /* TODO: uncomment if / after LDO is deployed through governance
-        LDO: {
-            address: '0xFdb794692724153d1488CcdBE0C56c252596735F',
-            decimals: 18,
-            symbol: 'LDO',
-            label: 'LDO',
-            bytes32String: LDO,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
-        /* TODO: uncomment if / after UNI is deployed through governance
-        UNI: {
-            address: '0x6fd9d7AD17242c41f7131d257212c54A0e816691',
-            decimals: 18,
-            symbol: 'UNI',
-            label: 'UNI',
-            bytes32String: UNI,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
         VELO: {
             address: '0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db', // VelodromeV2
             decimals: 18,
@@ -385,45 +386,6 @@ const tokens: Record<GebDeployment, TokenList> = {
             isCollateral: true,
             hasRewards: false,
         },
-        /* TODO: uncomment if / after frxETH is deployed through governance
-        FRXETH: {
-            address: '0x6806411765Af15Bddd26f8f544A34cC40cb9838B',
-            decimals: 18,
-            symbol: 'FRXETH',
-            label: 'frxETH',
-            bytes32String: FRXETH,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
-        /* TODO: uncomment if / after sfrxETH is deployed through governance
-        SFRXETH: {
-            address: '0x484c2D6e3cDd945a8B2DF735e079178C1036578c',
-            decimals: 18,
-            symbol: 'SFRXETH',
-            label: 'sfrxETH',
-            bytes32String: SFRXETH,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
-        /* TODO: uncomment if / after PENDLE is deployed through governance
-        PENDLE: {
-            address: '0xBC7B1Ff1c6989f006a1185318eD4E7b5796e66E1',
-            decimals: 18,
-            symbol: 'PENDLE',
-            label: 'PENDLE',
-            bytes32String: PENDLE,
-            collateralJoin: '',
-            collateralAuctionHouse: '',
-            isCollateral: true,
-            hasRewards: false,
-        },
-        */
         HAI: {
             address: '0x10398AbC267496E49106B07dd6BE13364D10dC71',
             decimals: 18,
@@ -638,12 +600,116 @@ const tokens: Record<GebDeployment, TokenList> = {
             hasRewards: false,
         },
     },
+    'localnet': {}
+}
+
+// Function to load local contract addresses from a JSON file
+// The file path is specified in an environment variable
+function loadLocalContractAddresses(): ContractList | null {
+    try {
+        // Get the file path from environment variable
+        const envVarName = 'LOCAL_CONTRACTS_PATH'
+        const filePath = process.env[envVarName]
+        
+        if (!filePath) {
+            console.warn(`Environment variable ${envVarName} not set. Cannot load local contract addresses.`)
+            return null
+        }
+        
+        // Resolve the file path relative to the current working directory
+        const resolvedPath = path.resolve(process.cwd(), filePath)
+        
+        if (!fs.existsSync(resolvedPath)) {
+            console.warn(`Local contracts file not found at ${resolvedPath}`)
+            return null
+        }
+        
+        // Read the JSON file
+        const fileContent = fs.readFileSync(resolvedPath, 'utf8')
+        const contractAddresses = JSON.parse(fileContent) as ContractList
+        
+        // Validate that all required keys are present
+        const missingKeys: string[] = []
+        Object.keys(addresses.mainnet).forEach(key => {
+            if (!(key in contractAddresses)) {
+                missingKeys.push(key)
+            }
+        })
+        
+        if (missingKeys.length > 0) {
+            console.warn(`Local contracts file is missing the following keys: ${missingKeys.join(', ')}`)
+            console.warn('Using default values for missing keys')
+            
+            // Use mainnet values for missing keys as fallback
+            missingKeys.forEach(key => {
+                contractAddresses[key as ContractKey] = addresses.mainnet[key as ContractKey]
+            })
+        }
+        
+        return contractAddresses
+    } catch (error) {
+        console.error('Error loading local contract addresses:', error)
+        return null
+    }
+}
+
+// Function to load local token list from a JSON file
+function loadLocalTokenList(): TokenList | null {
+    try {
+        // Get the file path from environment variable
+        const envVarName = 'LOCAL_TOKENS_PATH'
+        const filePath = process.env[envVarName]
+        
+        if (!filePath) {
+            console.warn(`Environment variable ${envVarName} not set. Cannot load local token list.`)
+            return null
+        }
+        
+        // Resolve the file path relative to the current working directory
+        const resolvedPath = path.resolve(process.cwd(), filePath)
+        
+        if (!fs.existsSync(resolvedPath)) {
+            console.warn(`Local tokens file not found at ${resolvedPath}`)
+            return null
+        }
+        
+        // Read the JSON file
+        const fileContent = fs.readFileSync(resolvedPath, 'utf8')
+        const tokenList = JSON.parse(fileContent) as TokenList
+        
+        return tokenList
+    } catch (error) {
+        console.error('Error loading local token list:', error)
+        return null
+    }
 }
 
 export const getTokenList = (network: GebDeployment): TokenList => {
+    if (network === 'localnet') {
+        const localTokens = loadLocalTokenList()
+        if (localTokens) {
+            return localTokens
+        }
+        
+        // Fallback to mainnet if local tokens couldn't be loaded
+        console.warn('Falling back to mainnet token list for localnet')
+        return tokens.mainnet
+    }
+    
     return tokens[network]
 }
 
 export const getAddressList = (network: GebDeployment): ContractList => {
+    if (network === 'localnet') {
+        const localAddresses = loadLocalContractAddresses()
+        if (localAddresses) {
+            return localAddresses
+        }
+        
+        // Fallback to mainnet if local addresses couldn't be loaded
+        console.warn('Falling back to mainnet contract addresses for localnet')
+        return addresses.mainnet
+    }
+    
     return addresses[network]
 }

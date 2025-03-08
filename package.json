@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@hai-on-op/abis": "1.0.7",
-    "ethers": "5.4.7"
+    "ethers": "5.4.7",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.5",
