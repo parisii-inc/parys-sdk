@@ -3,9 +3,21 @@
   "version": "1.0.0",
   "description": "Javascript client for PARYS",
   "license": "MIT",
-  "main": "lib",
+  "exports": {
+    ".": {
+      "browser": "./lib/browser.js",
+      "import": "./lib/index.js",
+      "require": "./index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "main": "index.js",
+  "module": "lib/index.js",
+  "browser": "lib/browser.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "index.js"
   ],
   "scripts": {
     "prebuild": "yarn --cwd ./solidity install && yarn --cwd ./solidity compile",
@@ -21,9 +33,9 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@hai-on-op/abis": "1.0.7",
-    "ethers": "5.4.7",
-    "dotenv": "^16.0.3"
+    "@hai-on-op/abis": "^0.0.0-7416308b",
+    "dotenv": "^16.0.3",
+    "ethers": "5.4.7"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.5",

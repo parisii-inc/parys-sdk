@@ -21,9 +21,19 @@ import {
     APXETH,
     MOO_VELO_V2_OP_VELO,
 } from '../utils'
-import * as fs from 'fs'
-import * as path from 'path'
-import 'dotenv/config' // Load environment variables from .env file
+
+// Import browser-compatible environment utilities instead of Node.js modules
+import { isBrowser, fs, path, env } from '../browser-env'
+
+// Only import dotenv in Node environment
+if (!isBrowser) {
+    try {
+        // This will be ignored in the browser build
+        require('dotenv/config')
+    } catch (e) {
+        console.warn('dotenv not available, using default environment')
+    }
+}
 
 // All keys are mandatory
 export type ContractKey =
@@ -185,44 +195,44 @@ const addresses: Record<GebDeployment, ContractList> = {
         MERKLE_DISTRIBUTOR_FACTORY_OP: '0x524fE171e80173C15381bB50034033dA282abCc6',
         MERKLE_DISTRIBUTOR_FACTORY_DINERO: '0xFC4fD07b8CbA6b008952656a3d16A25da012EA56',
     },
-    'localnet': {
-        MULTICALL: '',
-        ETH: '',
-        GEB_SYSTEM_COIN: '',
-        GEB_PROTOCOL_TOKEN: '',
-        GEB_SAFE_ENGINE: '',
-        GEB_ORACLE_RELAYER: '',
-        GEB_SURPLUS_AUCTION_HOUSE: '',
-        GEB_DEBT_AUCTION_HOUSE: '',
-        GEB_COLLATERAL_AUCTION_HOUSE_FACTORY: '',
-        GEB_ACCOUNTING_ENGINE: '',
-        GEB_LIQUIDATION_ENGINE: '',
-        GEB_COIN_JOIN: '',
-        GEB_COLLATERAL_JOIN_FACTORY: '',
-        GEB_TAX_COLLECTOR: '',
-        GEB_STABILITY_FEE_TREASURY: '',
-        GEB_RRFM_CALCULATOR: '',
-        GEB_RRFM_SETTER: '',
-        GEB_GLOBAL_SETTLEMENT: '',
-        GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE: '',
-        GEB_POST_SETTLEMENT_SURPLUS_AUCTIONEER: '',
-        SAFE_MANAGER: '',
-        PROXY_FACTORY: '',
-        PROXY_BASIC_ACTIONS: '',
-        PROXY_DEBT_AUCTION_ACTIONS: '',
-        PROXY_SURPLUS_AUCTION_ACTIONS: '',
-        PROXY_COLLATERAL_AUCTION_ACTIONS: '',
-        PROXY_POST_SETTLEMENT_SURPLUS_AUCTION_ACTIONS: '',
-        PROXY_GLOBAL_SETTLEMENT_ACTIONS: '',
-        PROXY_REWARDED_ACTIONS: '',
-        JOB_ACCOUNTING: '',
-        JOB_LIQUIDATION: '',
-        JOB_ORACLES: '',
+    localnet: {
+        MULTICALL: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        ETH: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+        GEB_SYSTEM_COIN: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+        GEB_PROTOCOL_TOKEN: '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512',
+        GEB_SAFE_ENGINE: '0xb7f8bc63bbcad18155201308c8f3540b07f84f5e',
+        GEB_ORACLE_RELAYER: '0xa51c1fc2f0d1a1b8494ed1fe312d7c3a78ed91c0',
+        GEB_SURPLUS_AUCTION_HOUSE: '0x0dcd1bf9a1b36ce34237eeafef220932846bcd82',
+        GEB_DEBT_AUCTION_HOUSE: '0x9a676e781a523b5d0c0e43731313a708cb607508',
+        GEB_COLLATERAL_AUCTION_HOUSE_FACTORY: '0x9a9f2ccfde556a7e9ff0848998aa4a0cfd8863ae',
+        GEB_ACCOUNTING_ENGINE: '0x0b306bf915c4d645ff596e518faf3f9669b97016',
+        GEB_LIQUIDATION_ENGINE: '0x959922be3caee4b8cd9a407cc3ac1c251c2007b1',
+        GEB_COIN_JOIN: '0x68b1d87f95878fe05b998f19b66f4baba5de1aed',
+        GEB_COLLATERAL_JOIN_FACTORY: '0x3aa5ebb10dc797cac828524e59a333d0a371443c',
+        GEB_TAX_COLLECTOR: '0xc6e7df5e7b4f2a278906862b61205850344d4e7d',
+        GEB_STABILITY_FEE_TREASURY: '0x59b670e9fa9d0a427751af201d676719a970857b',
+        GEB_RRFM_CALCULATOR: '0x5eb3bc0a489c5a8288765d2336659ebca68fcd00',
+        GEB_RRFM_SETTER: '0x36c02da8a0983159322a80ffe9f24b1acff8b570',
+        GEB_GLOBAL_SETTLEMENT: '0x9e545e3c0baab3e08cdfd552c960a1050f373042',
+        GEB_POST_SETTLEMENT_SURPLUS_AUCTION_HOUSE: '0xa82ff9afd8f496c3d6ac40e2a0f282e47488cfc9',
+        GEB_POST_SETTLEMENT_SURPLUS_AUCTIONEER: '0x1613beb3b2c4f22ee086b2b38c1476a3ce7f78e8',
+        SAFE_MANAGER: '0x7bc06c482dead17c0e297afbc32f6e63d3846650',
+        PROXY_FACTORY: '0x7969c5ed335650692bc04293b07f5bf2e7a673c0',
+        PROXY_BASIC_ACTIONS: '0xc351628eb244ec633d5f21fbd6621e1a683b1181',
+        PROXY_DEBT_AUCTION_ACTIONS: '0xfd471836031dc5108809d173a067e8486b9047a3',
+        PROXY_SURPLUS_AUCTION_ACTIONS: '0xcbeaf3bde82155f56486fb5a1072cb8baaf547cc',
+        PROXY_COLLATERAL_AUCTION_ACTIONS: '0x1429859428c0abc9c2c47c8ee9fbaf82cfa0f20f',
+        PROXY_POST_SETTLEMENT_SURPLUS_AUCTION_ACTIONS: '0xb0d4afd8879ed9f52b28595d31b441d079b2ca07',
+        PROXY_GLOBAL_SETTLEMENT_ACTIONS: '0x162a433068f51e18b7d13932f27e66a3f99e6890',
+        PROXY_REWARDED_ACTIONS: '0x922d6956c99e12dfeb3224dea977d0939758a1fe',
+        JOB_ACCOUNTING: '0x1291be112d480055dafd8a610b7d1e203891c274',
+        JOB_LIQUIDATION: '0x5f3f1dbd7b74c6b46e8c44f98792a1daf8d69154',
+        JOB_ORACLES: '0xb7278a61aa25c888815afc32ad3cc52ff24fe575',
         WRAPPED_TOKEN_HAI_VELO: '',
         MERKLE_DISTRIBUTOR_FACTORY_KITE: '',
         MERKLE_DISTRIBUTOR_FACTORY_OP: '',
         MERKLE_DISTRIBUTOR_FACTORY_DINERO: '',
-    }
+    },
 }
 
 export type TokenData = {
@@ -600,52 +610,128 @@ const tokens: Record<GebDeployment, TokenList> = {
             hasRewards: false,
         },
     },
-    'localnet': {}
+    localnet: {
+        // Default tokens for local development
+        PARYS: {
+            address: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
+            decimals: 18,
+            symbol: 'PARYS',
+            label: 'PARYS',
+            bytes32String: '0x5041525953000000000000000000000000000000000000000000000000000000',
+            collateralJoin: '',
+            collateralAuctionHouse: '',
+            isCollateral: false,
+            hasRewards: false,
+        },
+        AGREE: {
+            address: '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512',
+            decimals: 18,
+            symbol: 'AGREE',
+            label: 'AGREE',
+            bytes32String: '0x4147524545000000000000000000000000000000000000000000000000000000',
+            collateralJoin: '',
+            collateralAuctionHouse: '',
+            isCollateral: false,
+            hasRewards: false,
+        },
+        WETH: {
+            address: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+            decimals: 18,
+            symbol: 'WETH',
+            label: 'WETH',
+            bytes32String: '0x5745544800000000000000000000000000000000000000000000000000000000',
+            collateralJoin: '',
+            collateralAuctionHouse: '',
+            isCollateral: true,
+            hasRewards: true,
+        },
+    },
 }
 
 // Function to load local contract addresses from a JSON file
 // The file path is specified in an environment variable
 function loadLocalContractAddresses(): ContractList | null {
     try {
-        // Get the file path from environment variable
-        const envVarName = 'LOCAL_CONTRACTS_PATH'
-        const filePath = process.env[envVarName]
-        
+        // Get the file path from environment variable - support both Node.js and browser contexts
+        const envVarNames = ['LOCAL_CONTRACTS_PATH', 'VITE_LOCAL_CONTRACTS_PATH']
+        let filePath: string | null = null
+
+        // Try to get environment variable from various sources
+        for (const envVarName of envVarNames) {
+            // Check Node.js process.env
+            if (typeof process !== 'undefined' && process.env && process.env[envVarName]) {
+                filePath = process.env[envVarName]
+                console.log(`[SDK] Found ${envVarName} in process.env: ${filePath}`)
+                break
+            }
+
+            // Check window object directly (Vite might define it there)
+            if (typeof window !== 'undefined' && (window as any)[envVarName]) {
+                filePath = (window as any)[envVarName]
+                console.log(`[SDK] Found ${envVarName} on window: ${filePath}`)
+                break
+            }
+        }
+
+        // Hard-coded fallback for development
+        if (!filePath && typeof window !== 'undefined') {
+            filePath = './data/31337-contracts.json'
+            console.log(`[SDK] Using hard-coded fallback path: ${filePath}`)
+        }
+
         if (!filePath) {
-            console.warn(`Environment variable ${envVarName} not set. Cannot load local contract addresses.`)
+            console.warn(
+                `Environment variables ${envVarNames.join(', ')} not set. Cannot load local contract addresses.`
+            )
             return null
         }
-        
-        // Resolve the file path relative to the current working directory
-        const resolvedPath = path.resolve(process.cwd(), filePath)
-        
-        if (!fs.existsSync(resolvedPath)) {
-            console.warn(`Local contracts file not found at ${resolvedPath}`)
-            return null
+
+        // In browser environment, use relative path
+        const resolvedPath = typeof window !== 'undefined' ? filePath : path.resolve(process.cwd(), filePath)
+
+        let fileContent: string
+
+        // In browser, fetch the file
+        if (typeof window !== 'undefined') {
+            // In browser, use fetch API
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', resolvedPath, false) // Synchronous request
+            xhr.send(null)
+
+            if (xhr.status !== 200) {
+                throw new Error(`Failed to load ${resolvedPath}: ${xhr.statusText}`)
+            }
+
+            fileContent = xhr.responseText
+        } else {
+            // In Node.js, use fs
+            if (!fs.existsSync(resolvedPath)) {
+                console.warn(`Local contracts file not found at ${resolvedPath}`)
+                return null
+            }
+            fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
         }
-        
-        // Read the JSON file
-        const fileContent = fs.readFileSync(resolvedPath, 'utf8')
+
         const contractAddresses = JSON.parse(fileContent) as ContractList
-        
+
         // Validate that all required keys are present
         const missingKeys: string[] = []
-        Object.keys(addresses.mainnet).forEach(key => {
+        Object.keys(addresses.mainnet).forEach((key) => {
             if (!(key in contractAddresses)) {
                 missingKeys.push(key)
             }
         })
-        
+
         if (missingKeys.length > 0) {
             console.warn(`Local contracts file is missing the following keys: ${missingKeys.join(', ')}`)
             console.warn('Using default values for missing keys')
-            
+
             // Use mainnet values for missing keys as fallback
-            missingKeys.forEach(key => {
+            missingKeys.forEach((key) => {
                 contractAddresses[key as ContractKey] = addresses.mainnet[key as ContractKey]
             })
         }
-        
+
         return contractAddresses
     } catch (error) {
         console.error('Error loading local contract addresses:', error)
@@ -656,27 +742,66 @@ function loadLocalContractAddresses(): ContractList | null {
 // Function to load local token list from a JSON file
 function loadLocalTokenList(): TokenList | null {
     try {
-        // Get the file path from environment variable
-        const envVarName = 'LOCAL_TOKENS_PATH'
-        const filePath = process.env[envVarName]
-        
+        // Get the file path from environment variable - support both Node.js and browser contexts
+        const envVarNames = ['LOCAL_TOKENS_PATH', 'VITE_LOCAL_TOKENS_PATH']
+        let filePath: string | null = null
+
+        // Try to get environment variable from various sources
+        for (const envVarName of envVarNames) {
+            // Check Node.js process.env
+            if (typeof process !== 'undefined' && process.env && process.env[envVarName]) {
+                filePath = process.env[envVarName]
+                console.log(`[SDK] Found ${envVarName} in process.env: ${filePath}`)
+                break
+            }
+
+            // Check window object directly (Vite might define it there)
+            if (typeof window !== 'undefined' && (window as any)[envVarName]) {
+                filePath = (window as any)[envVarName]
+                console.log(`[SDK] Found ${envVarName} on window: ${filePath}`)
+                break
+            }
+        }
+
+        // Hard-coded fallback for development
+        if (!filePath && typeof window !== 'undefined') {
+            filePath = './data/31337-tokens.json'
+            console.log(`[SDK] Using hard-coded fallback path: ${filePath}`)
+        }
+
         if (!filePath) {
-            console.warn(`Environment variable ${envVarName} not set. Cannot load local token list.`)
+            console.warn(`Environment variables ${envVarNames.join(', ')} not set. Cannot load local token list.`)
             return null
         }
-        
-        // Resolve the file path relative to the current working directory
-        const resolvedPath = path.resolve(process.cwd(), filePath)
-        
-        if (!fs.existsSync(resolvedPath)) {
-            console.warn(`Local tokens file not found at ${resolvedPath}`)
-            return null
+
+        // In browser environment, use relative path
+        const resolvedPath = typeof window !== 'undefined' ? filePath : path.resolve(process.cwd(), filePath)
+
+        let fileContent: string
+
+        // In browser, fetch the file
+        if (typeof window !== 'undefined') {
+            // In browser, use fetch API
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', resolvedPath, false) // Synchronous request
+            xhr.send(null)
+
+            if (xhr.status !== 200) {
+                throw new Error(`Failed to load ${resolvedPath}: ${xhr.statusText}`)
+            }
+
+            fileContent = xhr.responseText
+        } else {
+            // In Node.js, use fs
+            if (!fs.existsSync(resolvedPath)) {
+                console.warn(`Local tokens file not found at ${resolvedPath}`)
+                return null
+            }
+            fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
         }
-        
-        // Read the JSON file
-        const fileContent = fs.readFileSync(resolvedPath, 'utf8')
+
         const tokenList = JSON.parse(fileContent) as TokenList
-        
+
         return tokenList
     } catch (error) {
         console.error('Error loading local token list:', error)
@@ -686,30 +811,122 @@ function loadLocalTokenList(): TokenList | null {
 
 export const getTokenList = (network: GebDeployment): TokenList => {
     if (network === 'localnet') {
+        console.log('[SDK] Using localnet token list')
+
+        // Try to load from local file first
         const localTokens = loadLocalTokenList()
         if (localTokens) {
+            console.log('[SDK] Successfully loaded local token list from file')
             return localTokens
         }
-        
-        // Fallback to mainnet if local tokens couldn't be loaded
-        console.warn('Falling back to mainnet token list for localnet')
-        return tokens.mainnet
+
+        // If we're in a browser environment and connected to network ID 31337,
+        // return the tokens from the local network directly
+        if (typeof window !== 'undefined') {
+            console.log('[SDK] Using hardcoded token list for localnet in browser')
+            return tokens.localnet || tokens.mainnet
+        }
     }
-    
+
     return tokens[network]
 }
 
 export const getAddressList = (network: GebDeployment): ContractList => {
     if (network === 'localnet') {
+        console.log('[SDK] Using localnet contract addresses')
+
+        // Try to load from local file first
         const localAddresses = loadLocalContractAddresses()
         if (localAddresses) {
+            console.log('[SDK] Successfully loaded local contract addresses from file')
             return localAddresses
         }
-        
-        // Fallback to mainnet if local addresses couldn't be loaded
-        console.warn('Falling back to mainnet contract addresses for localnet')
-        return addresses.mainnet
+
+        // If we're in a browser environment and connected to network ID 31337,
+        // return the addresses from the local network directly
+        if (typeof window !== 'undefined') {
+            console.log('[SDK] Using hardcoded contract addresses for localnet in browser')
+            return addresses.localnet || addresses.mainnet
+        }
     }
-    
+
     return addresses[network]
+}
+
+export interface ContractAddresses {
+    tokens: TokenAddresses
+    contracts: ContractList
+}
+
+export interface TokenAddresses {
+    tokenList: TokenList
+}
+
+export function debugGetAddresses(networkId: number): any {
+    console.log(`[SDK] Getting addresses for network ID: ${networkId}`)
+
+    if (networkId === 31337) {
+        console.log('[SDK] Loading local contract addresses')
+        const localAddresses = loadLocalContractAddresses()
+
+        if (localAddresses) {
+            console.log('[SDK] Successfully loaded local contract addresses')
+            return {
+                tokens: debugGetTokenAddresses(networkId),
+                contracts: localAddresses,
+            }
+        } else {
+            console.warn('[SDK] Failed to load local contract addresses, falling back to mainnet')
+            return {
+                tokens: debugGetTokenAddresses(networkId),
+                contracts: addresses.mainnet,
+            }
+        }
+    }
+
+    // Map the network ID to the deployment type
+    let network: GebDeployment = 'mainnet'
+    if (networkId === 10) {
+        network = 'mainnet'
+    } else if (networkId === 11155420) {
+        network = 'optimism-sepolia'
+    }
+
+    return {
+        tokens: debugGetTokenAddresses(networkId),
+        contracts: addresses[network],
+    }
+}
+
+export function debugGetTokenAddresses(networkId: number): any {
+    console.log(`[SDK] Getting token addresses for network ID: ${networkId}`)
+
+    if (networkId === 31337) {
+        console.log('[SDK] Loading local token addresses')
+        const localTokens = loadLocalTokenList()
+
+        if (localTokens) {
+            console.log('[SDK] Successfully loaded local token list')
+            return {
+                tokenList: localTokens,
+            }
+        } else {
+            console.warn('[SDK] Failed to load local token list, falling back to mainnet')
+            return {
+                tokenList: tokens.mainnet,
+            }
+        }
+    }
+
+    // Map the network ID to the deployment type
+    let network: GebDeployment = 'mainnet'
+    if (networkId === 10) {
+        network = 'mainnet'
+    } else if (networkId === 11155420) {
+        network = 'optimism-sepolia'
+    }
+
+    return {
+        tokenList: tokens[network],
+    }
 }

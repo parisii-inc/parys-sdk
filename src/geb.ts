@@ -1,8 +1,9 @@
 import { ethers } from 'ethers'
 import { ContractApis } from './api/contract-apis'
 import { Auctions } from './auctions'
-import { TokenList, getTokenList } from './contracts/addresses'
+import { TokenList, getTokenList, debugGetTokenAddresses } from './contracts/addresses'
 import { ContractList, GebDeployment, getAddressList } from './contracts/index'
+import { debugGetAddresses } from './contracts/addresses'
 import { GebError, GebErrorTypes } from './errors'
 import { BasicActions } from './proxy-action'
 import { Safe } from './schema/safe'
@@ -100,12 +101,38 @@ export class Geb {
             throw new GebError(GebErrorTypes.INVALID_PROVIDER)
         }
 
+        // Initialize with the provided network
         this.addresses = getAddressList(network)
         this.tokenList = getTokenList(network)
         this.contracts = new ContractApis(network, signerOrProvider)
         this.auctions = new Auctions(this.contracts)
         this.liquidations = new LiquidationActions(this.contracts, this.tokenList)
         this.distributors = new MerkleDistributor(this.contracts, this.provider)
+
+        // Check if we're connected to a local network (31337)
+        this.provider
+            .getNetwork()
+            .then((networkInfo) => {
+                console.log(`[SDK] Connected to network ID: ${networkInfo.chainId}`)
+
+                if (networkInfo.chainId === 31337 && network !== 'localnet') {
+                    console.log(
+                        '[SDK] Local network detected (31337), but not using localnet configuration. Reinitializing...'
+                    )
+
+                    // Reinitialize with localnet
+                    this.network = 'localnet'
+                    this.addresses = getAddressList('localnet')
+                    this.tokenList = getTokenList('localnet')
+                    this.contracts = new ContractApis('localnet', signerOrProvider)
+                    this.auctions = new Auctions(this.contracts)
+                    this.liquidations = new LiquidationActions(this.contracts, this.tokenList)
+                    this.distributors = new MerkleDistributor(this.contracts, this.provider)
+                }
+            })
+            .catch((error) => {
+                console.error('[SDK] Error detecting network:', error)
+            })
     }
 
     /**
