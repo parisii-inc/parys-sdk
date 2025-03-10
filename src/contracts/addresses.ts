@@ -22,17 +22,28 @@ import {
     MOO_VELO_V2_OP_VELO,
 } from '../utils'
 
-// Import browser-compatible environment utilities instead of Node.js modules
-import { isBrowser, fs, path, env } from '../browser-env'
+// Detect if we're in a browser environment
+export const isBrowser = typeof window !== 'undefined'
 
-// Only import dotenv in Node environment
+// Simplified environment handling with no dotenv dependency
+let fs: any = null
+let path: any = null
+let env: any = process.env || {}
+
+// Skip Node.js specific imports in browser
 if (!isBrowser) {
     try {
-        // This will be ignored in the browser build
-        require('dotenv/config')
+        // Use direct requires for Node.js environments only
+        fs = require('fs')
+        path = require('path')
+
+        // We don't need dotenv anymore as we're using fixed paths
+        console.log('[SDK] Running in Node.js environment')
     } catch (e) {
-        console.warn('dotenv not available, using default environment')
+        console.warn('[SDK] Node.js modules not available, running in a limited environment')
     }
+} else {
+    console.log('[SDK] Running in browser environment')
 }
 
 // All keys are mandatory
@@ -648,208 +659,159 @@ const tokens: Record<GebDeployment, TokenList> = {
     },
 }
 
-// Function to load local contract addresses from a JSON file
-// The file path is specified in an environment variable
+// Helper function for logging with timestamps
+function logWithTime(message: string): void {
+    const now = new Date()
+    console.log(`[SDK ${now.toISOString()}] ${message}`)
+}
+
+/**
+ * Simply load a local contracts file from a standardized location
+ * when dealing with local network ID 31337
+ */
 function loadLocalContractAddresses(): ContractList | null {
     try {
-        // Get the file path from environment variable - support both Node.js and browser contexts
-        const envVarNames = ['LOCAL_CONTRACTS_PATH', 'VITE_LOCAL_CONTRACTS_PATH']
-        let filePath: string | null = null
+        console.log('[SDK] Loading local contract addresses')
 
-        // Try to get environment variable from various sources
-        for (const envVarName of envVarNames) {
-            // Check Node.js process.env
-            if (typeof process !== 'undefined' && process.env && process.env[envVarName]) {
-                filePath = process.env[envVarName]
-                console.log(`[SDK] Found ${envVarName} in process.env: ${filePath}`)
-                break
+        // In browser environment, use fixed path to public directory
+        if (isBrowser) {
+            // Standard path for local development
+            const filePath = '/data/31337-contracts.json'
+            console.log(`[SDK] Loading contracts from standard path: ${filePath}`)
+
+            try {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', filePath, false) // Synchronous request for simplicity
+                xhr.send(null)
+
+                if (xhr.status === 200) {
+                    const contractAddresses = JSON.parse(xhr.responseText) as ContractList
+                    console.log('[SDK] Successfully loaded contract addresses')
+                    return contractAddresses
+                } else {
+                    console.error(`[SDK] Failed to load contract addresses: ${xhr.status} ${xhr.statusText}`)
+                }
+            } catch (error) {
+                console.error('[SDK] Error loading contract addresses:', error)
             }
+        } else if (fs && path) {
+            // In Node.js environment, try a relative path
+            const filePath = './public/data/31337-contracts.json'
+            const resolvedPath = path.resolve(process.cwd(), filePath)
 
-            // Check window object directly (Vite might define it there)
-            if (typeof window !== 'undefined' && (window as any)[envVarName]) {
-                filePath = (window as any)[envVarName]
-                console.log(`[SDK] Found ${envVarName} on window: ${filePath}`)
-                break
+            if (fs.existsSync(resolvedPath)) {
+                const fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
+                const contractAddresses = JSON.parse(fileContent) as ContractList
+                console.log(`[SDK] Successfully loaded contract addresses from: ${resolvedPath}`)
+                return contractAddresses
+            } else {
+                console.warn(`[SDK] File not found at: ${resolvedPath}`)
             }
-        }
-
-        // Hard-coded fallback for development
-        if (!filePath && typeof window !== 'undefined') {
-            filePath = './data/31337-contracts.json'
-            console.log(`[SDK] Using hard-coded fallback path: ${filePath}`)
-        }
-
-        if (!filePath) {
-            console.warn(
-                `Environment variables ${envVarNames.join(', ')} not set. Cannot load local contract addresses.`
-            )
-            return null
-        }
-
-        // In browser environment, use relative path
-        const resolvedPath = typeof window !== 'undefined' ? filePath : path.resolve(process.cwd(), filePath)
-
-        let fileContent: string
-
-        // In browser, fetch the file
-        if (typeof window !== 'undefined') {
-            // In browser, use fetch API
-            const xhr = new XMLHttpRequest()
-            xhr.open('GET', resolvedPath, false) // Synchronous request
-            xhr.send(null)
-
-            if (xhr.status !== 200) {
-                throw new Error(`Failed to load ${resolvedPath}: ${xhr.statusText}`)
-            }
-
-            fileContent = xhr.responseText
         } else {
-            // In Node.js, use fs
-            if (!fs.existsSync(resolvedPath)) {
-                console.warn(`Local contracts file not found at ${resolvedPath}`)
-                return null
-            }
-            fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
+            console.warn('[SDK] Neither browser nor Node.js file access methods are available')
         }
 
-        const contractAddresses = JSON.parse(fileContent) as ContractList
-
-        // Validate that all required keys are present
-        const missingKeys: string[] = []
-        Object.keys(addresses.mainnet).forEach((key) => {
-            if (!(key in contractAddresses)) {
-                missingKeys.push(key)
-            }
-        })
-
-        if (missingKeys.length > 0) {
-            console.warn(`Local contracts file is missing the following keys: ${missingKeys.join(', ')}`)
-            console.warn('Using default values for missing keys')
-
-            // Use mainnet values for missing keys as fallback
-            missingKeys.forEach((key) => {
-                contractAddresses[key as ContractKey] = addresses.mainnet[key as ContractKey]
-            })
-        }
-
-        return contractAddresses
+        // Fallback to default addresses
+        console.warn('[SDK] Falling back to default contract addresses')
+        return addresses.localnet
     } catch (error) {
-        console.error('Error loading local contract addresses:', error)
+        console.error('[SDK] Error in loadLocalContractAddresses:', error)
         return null
     }
 }
 
-// Function to load local token list from a JSON file
+/**
+ * Simply load a local tokens file from a standardized location
+ * when dealing with local network ID 31337
+ */
 function loadLocalTokenList(): TokenList | null {
     try {
-        // Get the file path from environment variable - support both Node.js and browser contexts
-        const envVarNames = ['LOCAL_TOKENS_PATH', 'VITE_LOCAL_TOKENS_PATH']
-        let filePath: string | null = null
+        console.log('[SDK] Loading local token list')
 
-        // Try to get environment variable from various sources
-        for (const envVarName of envVarNames) {
-            // Check Node.js process.env
-            if (typeof process !== 'undefined' && process.env && process.env[envVarName]) {
-                filePath = process.env[envVarName]
-                console.log(`[SDK] Found ${envVarName} in process.env: ${filePath}`)
-                break
+        // In browser environment, use fixed path to public directory
+        if (isBrowser) {
+            // Standard path for local development
+            const filePath = '/data/31337-tokens.json'
+            console.log(`[SDK] Loading tokens from standard path: ${filePath}`)
+
+            try {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', filePath, false) // Synchronous request for simplicity
+                xhr.send(null)
+
+                if (xhr.status === 200) {
+                    const tokenList = JSON.parse(xhr.responseText) as TokenList
+                    console.log('[SDK] Successfully loaded token list')
+                    return tokenList
+                } else {
+                    console.error(`[SDK] Failed to load token list: ${xhr.status} ${xhr.statusText}`)
+                }
+            } catch (error) {
+                console.error('[SDK] Error loading token list:', error)
             }
+        } else if (fs && path) {
+            // In Node.js environment, try a relative path
+            const filePath = './public/data/31337-tokens.json'
+            const resolvedPath = path.resolve(process.cwd(), filePath)
 
-            // Check window object directly (Vite might define it there)
-            if (typeof window !== 'undefined' && (window as any)[envVarName]) {
-                filePath = (window as any)[envVarName]
-                console.log(`[SDK] Found ${envVarName} on window: ${filePath}`)
-                break
+            if (fs.existsSync(resolvedPath)) {
+                const fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
+                const tokenList = JSON.parse(fileContent) as TokenList
+                console.log(`[SDK] Successfully loaded token list from: ${resolvedPath}`)
+                return tokenList
+            } else {
+                console.warn(`[SDK] File not found at: ${resolvedPath}`)
             }
-        }
-
-        // Hard-coded fallback for development
-        if (!filePath && typeof window !== 'undefined') {
-            filePath = './data/31337-tokens.json'
-            console.log(`[SDK] Using hard-coded fallback path: ${filePath}`)
-        }
-
-        if (!filePath) {
-            console.warn(`Environment variables ${envVarNames.join(', ')} not set. Cannot load local token list.`)
-            return null
-        }
-
-        // In browser environment, use relative path
-        const resolvedPath = typeof window !== 'undefined' ? filePath : path.resolve(process.cwd(), filePath)
-
-        let fileContent: string
-
-        // In browser, fetch the file
-        if (typeof window !== 'undefined') {
-            // In browser, use fetch API
-            const xhr = new XMLHttpRequest()
-            xhr.open('GET', resolvedPath, false) // Synchronous request
-            xhr.send(null)
-
-            if (xhr.status !== 200) {
-                throw new Error(`Failed to load ${resolvedPath}: ${xhr.statusText}`)
-            }
-
-            fileContent = xhr.responseText
         } else {
-            // In Node.js, use fs
-            if (!fs.existsSync(resolvedPath)) {
-                console.warn(`Local tokens file not found at ${resolvedPath}`)
-                return null
-            }
-            fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
+            console.warn('[SDK] Neither browser nor Node.js file access methods are available')
         }
 
-        const tokenList = JSON.parse(fileContent) as TokenList
-
-        return tokenList
+        // Fallback to default tokens
+        console.warn('[SDK] Falling back to default token list')
+        return tokens.localnet
     } catch (error) {
-        console.error('Error loading local token list:', error)
+        console.error('[SDK] Error in loadLocalTokenList:', error)
         return null
     }
 }
 
 export const getTokenList = (network: GebDeployment): TokenList => {
     if (network === 'localnet') {
-        console.log('[SDK] Using localnet token list')
+        console.log('[SDK] Getting tokens for localnet')
 
-        // Try to load from local file first
+        // Try to load from local file
         const localTokens = loadLocalTokenList()
         if (localTokens) {
-            console.log('[SDK] Successfully loaded local token list from file')
+            console.log('[SDK] Using locally loaded token list')
             return localTokens
         }
 
-        // If we're in a browser environment and connected to network ID 31337,
-        // return the tokens from the local network directly
-        if (typeof window !== 'undefined') {
-            console.log('[SDK] Using hardcoded token list for localnet in browser')
-            return tokens.localnet || tokens.mainnet
-        }
+        // If loading fails, use default localnet tokens
+        console.log('[SDK] Using default localnet token list')
+        return tokens.localnet
     }
 
+    console.log(`[SDK] Using ${network} token list`)
     return tokens[network]
 }
 
 export const getAddressList = (network: GebDeployment): ContractList => {
     if (network === 'localnet') {
-        console.log('[SDK] Using localnet contract addresses')
+        console.log('[SDK] Getting contract addresses for localnet')
 
-        // Try to load from local file first
+        // Try to load from local file
         const localAddresses = loadLocalContractAddresses()
         if (localAddresses) {
-            console.log('[SDK] Successfully loaded local contract addresses from file')
+            console.log('[SDK] Using locally loaded contract addresses')
             return localAddresses
         }
 
-        // If we're in a browser environment and connected to network ID 31337,
-        // return the addresses from the local network directly
-        if (typeof window !== 'undefined') {
-            console.log('[SDK] Using hardcoded contract addresses for localnet in browser')
-            return addresses.localnet || addresses.mainnet
-        }
+        // If loading fails, use default localnet addresses
+        console.log('[SDK] Using default localnet contract addresses')
+        return addresses.localnet
     }
 
+    console.log(`[SDK] Using ${network} contract addresses`)
     return addresses[network]
 }
 
