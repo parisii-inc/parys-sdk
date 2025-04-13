@@ -1,15 +1,14 @@
-[![image](https://img.shields.io/npm/v/@hai-on-op/sdk.svg?style=flat-square)](https://www.npmjs.org/package/@hai-on-op/sdk)
 
 # SDK
 
-Library to interact with the GEB smart contracts. Manage your safes, mint RAI, inspect the system state, and much more.
+Library to interact with the PARYS Protocol smart contracts. Manage your safes, mint PARYS, inspect the system state, and much more.
 
 The library is written in Typescript with full typing support. It allows access to the low level API to directly interact with the contracts.
 
 ## Install
 
 ```
-npm install @hai-on-op/sdk
+npm install @parisii-inc/parys-sdk
 ```
 
 
@@ -18,7 +17,7 @@ npm install @hai-on-op/sdk
 This is a complete example of how you can inspect a SAFE and also open a new one using your own proxy:
 ```typescript
 import { ethers, utils as ethersUtils } from 'ethers'
-import { Geb, utils } from '@hai-on-op/sdk'
+import { Geb, utils } from '@parisii-inc/parys-sdk'
 
 // Setup Ether.js
 const provider = new ethers.providers.JsonRpcProvider(
@@ -31,27 +30,27 @@ const geb = new Geb('kovan', provider)
 
 // Get a SAFE
 const safe = await geb.getSafe(4)
-console.log(`Safe id 4 has: ${utils.wadToFixed(safe.debt).toString()} RAI of debt.`)
+console.log(`Safe id 4 has: ${utils.wadToFixed(safe.debt).toString()} PARYS of debt.`)
 console.log(`It will get liquidated if ETH price falls below ${(await safe.liquidationPrice())?.toString()} USD.`)
 
-// Open a new SAFE, lock ETH and draw RAI in a single transaction using a proxy
+// Open a new SAFE, lock ETH and draw PARYS in a single transaction using a proxy
 // Note: Before doing this you need to create your own proxy
 
 // We first need to check that the system didn't reach the debt ceiling so that we can
-// mint more RAI.
+// mint more PARYS.
 const globalDebt = await geb.contracts.safeEngine.globalDebt()
 const debtCeiling = await geb.contracts.safeEngine.globalDebtCeiling()
-const raiToDraw = ethersUtils.parseEther('15')
-if(globalDebt.add(raiToDraw).gt(debtCeiling)) {
-    throw new Error('Debt ceiling too low, not possible to draw this amount of RAI.')
+const PARYSToDraw = ethersUtils.parseEther('15')
+if(globalDebt.add(PARYSToDraw).gt(debtCeiling)) {
+    throw new Error('Debt ceiling too low, not possible to draw this amount of PARYS.')
 }
 
-// We're good to mint some RAI! 
+// We're good to mint some PARYS! 
 const proxy = await geb.getProxyAction(wallet.address)
 const tx = proxy.openLockETHAndGenerateDebt(
     ethersUtils.parseEther('1'), // Lock 1 Ether
     utils.ETH_A,                 // Of collateral ETH
-    raiToDraw                    // And draw 15 RAI
+    PARYSToDraw                    // And draw 15 PARYS
 )
 
 tx.gasPrice = ethers.BigNumber.from('80').mul('1000000000') // Set the gas price to 80 Gwei
@@ -80,11 +79,11 @@ await wallet.sendTransaction(tx)
 ```typescript
 const proxy = await geb.getProxyAction("0xdefidream...")
 
-// You first need to approve your proxy to spend your RAI
+// You first need to approve your proxy to spend your PARYS
 let tx =  geb.contracts.systemCoin.approve(proxy.proxyAddress, ethers.constants.MaxUint256)
 await wallet.sendTransaction(tx)
 
-// Repay 1 RAI of debt to SAFE #4
+// Repay 1 PARYS of debt to SAFE #4
 tx = proxy.repayDebt(4, ethersUtils.parseEther('1'))
 await wallet.sendTransaction(tx)
 ```
@@ -93,7 +92,7 @@ await wallet.sendTransaction(tx)
 ```typescript
 const proxy = await geb.getProxyAction("0xdefidream...")
 
-// You first need to approve your proxy to spend your RAI
+// You first need to approve your proxy to spend your PARYS
 let tx =  geb.contracts.systemCoin.approve(proxy.proxyAddress, ethers.constants.MaxUint256)
 await wallet.sendTransaction(tx)
 
@@ -114,7 +113,7 @@ await wallet.sendTransaction(tx)
 const proxy = await geb.getProxyAction("0xdefidream...")
 const safe = await geb.getSafe(4)
 
-// You first need to approve your proxy to spend your RAI
+// You first need to approve your proxy to spend your PARYS
 let tx =  geb.contracts.systemCoin.approve(proxy.proxyAddress, ethers.constants.MaxUint256)
 await wallet.sendTransaction(tx)
 

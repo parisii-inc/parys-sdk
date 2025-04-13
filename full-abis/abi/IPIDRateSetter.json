@@ -1,0 +1,268 @@
+[
+  {
+    "type": "function",
+    "name": "_params",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_updateRateDelay",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "addAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "authorizedAccounts",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_authorized",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "authorizedAccounts",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_accounts",
+        "type": "address[]",
+        "internalType": "address[]"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastUpdateTime",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_lastUpdateTime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "modifyParameters",
+    "inputs": [
+      {
+        "name": "_param",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "oracleRelayer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_oracleRelayer",
+        "type": "address",
+        "internalType": "contract IOracleRelayer"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "params",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_pidRateSetterParams",
+        "type": "tuple",
+        "internalType": "struct IPIDRateSetter.PIDRateSetterParams",
+        "components": [
+          {
+            "name": "updateRateDelay",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pidCalculator",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_pidCalculator",
+        "type": "address",
+        "internalType": "contract IPIDController"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "removeAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateRate",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "AddAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ModifyParameters",
+    "inputs": [
+      {
+        "name": "_param",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_data",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RemoveAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UpdateRedemptionRate",
+    "inputs": [
+      {
+        "name": "_marketPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_redemptionPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_redemptionRate",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AlreadyAuthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotAuthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PIDRateSetter_InvalidPriceFeed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PIDRateSetter_RateSetterCooldown",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "UnrecognizedCType",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "UnrecognizedParam",
+    "inputs": []
+  }
+]

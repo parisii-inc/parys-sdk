@@ -1,0 +1,151 @@
+[
+  {
+    "type": "error",
+    "name": "IntNotGreaterOrEqualThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      {
+        "name": "_y",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "IntNotGreaterThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      {
+        "name": "_y",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "IntNotLesserOrEqualThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      {
+        "name": "_y",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "IntNotLesserThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      {
+        "name": "_y",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NoCode",
+    "inputs": [
+      {
+        "name": "_contract",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotGreaterOrEqualThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotGreaterThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotLesserOrEqualThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotLesserThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NullAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NullAmount",
+    "inputs": []
+  }
+]

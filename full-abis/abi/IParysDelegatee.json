@@ -1,0 +1,148 @@
+[
+  {
+    "type": "function",
+    "name": "castVote",
+    "inputs": [
+      {
+        "name": "_governor",
+        "type": "address",
+        "internalType": "contract IGovernor"
+      },
+      {
+        "name": "_proposalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_support",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_weight",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "castVoteWithReason",
+    "inputs": [
+      {
+        "name": "_governor",
+        "type": "address",
+        "internalType": "contract IGovernor"
+      },
+      {
+        "name": "_proposalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_support",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "_reason",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_weight",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "castVoteWithReasonAndParams",
+    "inputs": [
+      {
+        "name": "_governor",
+        "type": "address",
+        "internalType": "contract IGovernor"
+      },
+      {
+        "name": "_proposalId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_support",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "_reason",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_params",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_weight",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "delegatee",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_delegatee",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setDelegatee",
+    "inputs": [
+      {
+        "name": "_delegatee",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "DelegateeSet",
+    "inputs": [
+      {
+        "name": "_delegatee",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "OnlyDelegatee",
+    "inputs": []
+  }
+]

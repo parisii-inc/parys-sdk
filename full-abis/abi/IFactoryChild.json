@@ -1,0 +1,25 @@
+[
+  {
+    "type": "function",
+    "name": "factory",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_factory",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "error",
+    "name": "CallerNotFactory",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotFactoryDeployment",
+    "inputs": []
+  }
+]

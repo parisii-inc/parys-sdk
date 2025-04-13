@@ -1,0 +1,726 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_safeEngine",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_systemCoinOracle",
+        "type": "address",
+        "internalType": "contract IBaseOracle"
+      },
+      {
+        "name": "_carbonPriceIndexOracle",
+        "type": "address",
+        "internalType": "contract IBaseOracle"
+      },
+      {
+        "name": "_oracleRelayerParams",
+        "type": "tuple",
+        "internalType": "struct IOracleRelayer.OracleRelayerParams",
+        "components": [
+          {
+            "name": "redemptionRateUpperBound",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "redemptionRateLowerBound",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "_cParams",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "oracle",
+        "type": "address",
+        "internalType": "contract IBaseOracle"
+      },
+      {
+        "name": "safetyCRatio",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "liquidationCRatio",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "_params",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "redemptionRateUpperBound",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "redemptionRateLowerBound",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "addAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "authorizedAccounts",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_authorized",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "authorizedAccounts",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_accounts",
+        "type": "address[]",
+        "internalType": "address[]"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "cParams",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_oracleRelayerCParams",
+        "type": "tuple",
+        "internalType": "struct IOracleRelayer.OracleRelayerCollateralParams",
+        "components": [
+          {
+            "name": "oracle",
+            "type": "address",
+            "internalType": "contract IBaseOracle"
+          },
+          {
+            "name": "safetyCRatio",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "liquidationCRatio",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "calcRedemptionPrice",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_virtualRedemptionPrice",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "carbonPriceIndexOracle",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IBaseOracle"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "collateralList",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "__collateralList",
+        "type": "bytes32[]",
+        "internalType": "bytes32[]"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "contractEnabled",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "disableContract",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "initializeCollateralType",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_collateralParams",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "marketPrice",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_marketPrice",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "modifyParameters",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_param",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "modifyParameters",
+    "inputs": [
+      {
+        "name": "_param",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "params",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_oracleRelayerParams",
+        "type": "tuple",
+        "internalType": "struct IOracleRelayer.OracleRelayerParams",
+        "components": [
+          {
+            "name": "redemptionRateUpperBound",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "redemptionRateLowerBound",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "redemptionPrice",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_updatedPrice",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "redemptionPriceUpdateTime",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "redemptionRate",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "removeAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "safeEngine",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract ISAFEEngine"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "systemCoinOracle",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IBaseOracle"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "targetPriceUpdateTime",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "targetRedemptionPrice",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_target",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "updateCollateralPrice",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateRedemptionPriceFromOracle",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_updatedTarget",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateRedemptionRate",
+    "inputs": [
+      {
+        "name": "_redemptionRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "AddAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "DisableContract",
+    "inputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "InitializeCollateralType",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ModifyParameters",
+    "inputs": [
+      {
+        "name": "_param",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_data",
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "RemoveAuthorization",
+    "inputs": [
+      {
+        "name": "_account",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UpdateCollateralPrice",
+    "inputs": [
+      {
+        "name": "_cType",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_priceFeedValue",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_safetyPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "_liquidationPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UpdateRedemptionPrice",
+    "inputs": [
+      {
+        "name": "_redemptionPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UpdateRedemptionRate",
+    "inputs": [
+      {
+        "name": "_redemptionRate",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "UpdateTargetRedemptionPrice",
+    "inputs": [
+      {
+        "name": "_targetPrice",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AlreadyAuthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "CollateralTypeAlreadyInitialized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ContractIsDisabled",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ContractIsEnabled",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NoCode",
+    "inputs": [
+      {
+        "name": "_contract",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NonDisableable",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotAuthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotGreaterOrEqualThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotGreaterThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotLesserThan",
+    "inputs": [
+      {
+        "name": "_x",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_y",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NullAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OracleRelayer_CollateralTypeAlreadyInitialized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OracleRelayer_RedemptionPriceNotUpdated",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "UnrecognizedCType",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "UnrecognizedParam",
+    "inputs": []
+  }
+]

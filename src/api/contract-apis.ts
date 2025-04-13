@@ -66,11 +66,7 @@ export class ContractApis {
         this.rateSetter = types.IPIDRateSetter__factory.connect(addressList.GEB_RRFM_SETTER, signerOrProvider)
         this.piCalculator = types.IPIDController__factory.connect(addressList.GEB_RRFM_CALCULATOR, signerOrProvider)
         
-        this.wrappedTokenHaiVelo = types.IWrappedToken__factory.connect(addressList.WRAPPED_TOKEN_HAI_VELO, signerOrProvider)
-
-        this.merkleDistributorFactoryKite = types.MerkleDistributorFactory__factory.connect(addressList.MERKLE_DISTRIBUTOR_FACTORY_KITE, signerOrProvider)
-        this.merkleDistributorFactoryOp = types.MerkleDistributorFactory__factory.connect(addressList.MERKLE_DISTRIBUTOR_FACTORY_OP, signerOrProvider)
-        this.merkleDistributorFactoryDinero = types.MerkleDistributorFactory__factory.connect(addressList.MERKLE_DISTRIBUTOR_FACTORY_DINERO, signerOrProvider)
+        this.merkleDistributorFactoryAgree = types.MerkleDistributorFactory__factory.connect(addressList.MERKLE_DISTRIBUTOR_FACTORY_AGREE, signerOrProvider)
 
         this.oracleJob = types.IOracleJob__factory.connect(addressList.JOB_ORACLES, signerOrProvider)
         this.accountingJob = types.IAccountingJob__factory.connect(addressList.JOB_ACCOUNTING, signerOrProvider)

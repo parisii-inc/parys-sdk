@@ -1,6 +1,6 @@
 {
   "name": "@parisii-inc/parys-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript client for PARYS",
   "license": "MIT",
   "exports": {
@@ -33,7 +33,6 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@hai-on-op/abis": "^0.0.0-7416308b",
     "dotenv": "^16.0.3",
     "ethers": "5.4.7"
   },

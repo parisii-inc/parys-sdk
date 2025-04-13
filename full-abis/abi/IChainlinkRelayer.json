@@ -1,0 +1,118 @@
+[
+  {
+    "type": "function",
+    "name": "getResultWithValidity",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_result",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_validity",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "multiplier",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_multiplier",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "priceFeed",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_priceFeed",
+        "type": "address",
+        "internalType": "contract IChainlinkOracle"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "read",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_value",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sequencerUptimeFeed",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_sequencerUptimeFeed",
+        "type": "address",
+        "internalType": "contract IChainlinkOracle"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "staleThreshold",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_staleThreshold",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "symbol",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_symbol",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "error",
+    "name": "ChainlinkRelayer_NullPriceFeed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ChainlinkRelayer_NullSequencerUptimeFeed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ChainlinkRelayer_NullStaleThreshold",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidPriceFeed",
+    "inputs": []
+  }
+]

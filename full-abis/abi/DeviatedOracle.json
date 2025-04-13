@@ -1,0 +1,98 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_symbol",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "_oracleRelayer",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_deviation",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "deviation",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getResultWithValidity",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_price",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_validity",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "oracleRelayer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IOracleRelayer"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "read",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "_price",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "symbol",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "error",
+    "name": "InvalidPriceFeed",
+    "inputs": []
+  }
+]

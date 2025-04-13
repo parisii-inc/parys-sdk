@@ -66,8 +66,8 @@ export async function fetchAuctionData(geb: Geb, proxyAddress: string): Promise<
             geb.contracts.accountingEngine.address,
             geb.contracts.safeEngine.address,
             proxyAddress,
-            geb.tokenList.KITE.address,
-            geb.tokenList.HAI.address,
+            geb.tokenList.AGREE.address,
+            geb.tokenList.PARYS.address,
         ]
     )
     // Generate payload from input data
