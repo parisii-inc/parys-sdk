@@ -18,21 +18,22 @@ export class ContractApis {
     public postSettlementSurplusAuctionHouse: types.IPostSettlementSurplusAuctionHouse
     public postSettlementSurplusAuctioneer: types.ISettlementSurplusAuctioneer
     public stabilityFeeTreasury: types.IStabilityFeeTreasury
-    public safeManager: types.IHaiSafeManager
+    public safeManager: types.IParysSafeManager
     public joinCoin: types.ICoinJoin
-    public proxyFactory: types.IHaiProxyFactory
+    public proxyFactory: types.IParysProxyFactory
     public rateSetter: types.IPIDRateSetter
     public piCalculator: types.IPIDController
 
-    public wrappedTokenHaiVelo: types.IWrappedToken
+    public wrappedTokenHaiVelo: types.WrappedToken
 
     public merkleDistributorFactoryKite: types.MerkleDistributorFactory
     public merkleDistributorFactoryOp: types.MerkleDistributorFactory
     public merkleDistributorFactoryDinero: types.MerkleDistributorFactory
+    public merkleDistributorFactoryAgree: types.MerkleDistributorFactory
 
-    public oracleJob: types.IOracleJob
-    public accountingJob: types.IAccountingJob
-    public liquidationJob: types.ILiquidationJob
+    public oracleJob: types.Job
+    public accountingJob: types.Job
+    public liquidationJob: types.LiquidationJob
     
     public protocolToken: types.ERC20
     public systemCoin: types.ERC20
@@ -72,8 +73,8 @@ export class ContractApis {
         this.accountingJob = types.IAccountingJob__factory.connect(addressList.JOB_ACCOUNTING, signerOrProvider)
         this.liquidationJob = types.ILiquidationJob__factory.connect(addressList.JOB_LIQUIDATION, signerOrProvider)
 
-        this.safeManager = types.IHaiSafeManager__factory.connect(addressList.SAFE_MANAGER, signerOrProvider)
-        this.proxyFactory = types.IHaiProxyFactory__factory.connect(addressList.PROXY_FACTORY, signerOrProvider)
+        this.safeManager = types.IParysSafeManager__factory.connect(addressList.SAFE_MANAGER, signerOrProvider)
+        this.proxyFactory = types.IParysProxyFactory__factory.connect(addressList.PROXY_FACTORY, signerOrProvider)
         
         this.weth = types.WETH9__factory.connect(addressList.ETH, signerOrProvider)
 

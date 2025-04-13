@@ -5,6 +5,7 @@ import { ContractList, GebDeployment, getAddressList } from './contracts'
 import { TokenList, getTokenList } from './contracts/addresses'
 import * as types from './typechained'
 import { NULL_ADDRESS } from './utils'
+import { GebProviderInterface } from './contracts/chain-provider-interface'
 
 /**
  * Convenience class to call functions from [BasicActions](https://github.com/reflexer-labs/geb-proxy-actions/blob/master/src/BasicActions.sol) through a proxy contract registered in the [GebProxyRegistry](https://github.com/reflexer-labs/geb-proxy-registry/blob/master/src/GebProxyRegistry.sol). These actions bundle multiple actions in one (e.g: open a safe + lock some ETH + draw some system coins).
@@ -14,7 +15,7 @@ export class BasicActions {
      * Underlying proxy object. Can be use to make custom calls to the proxy using `proxy.execute()` function.
      * For the details of each function
      */
-    public proxy: types.IHaiProxy
+    public proxy: types.IParysProxy
 
     /**
      * Address of the base proxy actions contract.
@@ -66,15 +67,15 @@ export class BasicActions {
         this.addressList = getAddressList(network)
         this.tokenList = getTokenList(network)
 
-        this.proxy = types.IHaiProxy__factory.connect(proxyAddress, this.chainProvider)
+        this.proxy = types.IParysProxy__factory.connect(proxyAddress, this.chainProvider)
 
         // Set proxy action contract addresses
-        this.proxyActionCoreAddress = this.addressList.PROXY_BASIC_ACTIONS
-        this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS
-        this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS
-        this.proxyActionCollateralAuctionAddress = this.addressList.PROXY_COLLATERAL_AUCTION_ACTIONS
-        this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_GLOBAL_SETTLEMENT_ACTIONS
-        this.proxyRewardedActionsAddress = this.addressList.PROXY_REWARDED_ACTIONS
+        this.proxyActionCoreAddress = this.addressList.PROXY_BASIC_ACTIONS || NULL_ADDRESS
+        this.proxyActionGlobalSettlementAddress = this.addressList.PROXY_GLOBAL_SETTLEMENT_ACTIONS || NULL_ADDRESS
+        this.proxyActionDebtAuctionAddress = this.addressList.PROXY_DEBT_AUCTION_ACTIONS || NULL_ADDRESS
+        this.proxyActionSurplusAuctionAddress = this.addressList.PROXY_SURPLUS_AUCTION_ACTIONS || NULL_ADDRESS
+        this.proxyActionCollateralAuctionAddress = this.addressList.PROXY_COLLATERAL_AUCTION_ACTIONS || NULL_ADDRESS
+        this.proxyRewardedActionsAddress = this.addressList.PROXY_REWARDED_ACTIONS || NULL_ADDRESS
 
         // Proxy contract APIs
         this.proxyActionCore = types.IBasicActions__factory.connect(this.proxyActionCoreAddress, this.chainProvider)
@@ -511,5 +512,33 @@ export class BasicActions {
                 this.addressList.GEB_COIN_JOIN
             )
         )
+    }
+
+    public getProxy() {
+        return this.proxy
+    }
+
+    public basicActions(): types.IBasicActions {
+        return types.IBasicActions__factory.connect(this.proxy.address, this.chainProvider)
+    }
+
+    public globalSettlement(): types.IGlobalSettlementActions {
+        return types.IGlobalSettlementActions__factory.connect(this.proxy.address, this.chainProvider)
+    }
+
+    public debtBid(): types.IDebtBidActions {
+        return types.IDebtBidActions__factory.connect(this.proxy.address, this.chainProvider)
+    }
+
+    public surplusBid(): types.ISurplusBidActions {
+        return types.ISurplusBidActions__factory.connect(this.proxy.address, this.chainProvider)
+    }
+
+    public collateralBid(): types.ICollateralBidActions {
+        return types.ICollateralBidActions__factory.connect(this.proxy.address, this.chainProvider)
+    }
+
+    public rewardedActions(): types.IRewardedActions {
+        return types.IRewardedActions__factory.connect(this.proxy.address, this.chainProvider)
     }
 }
