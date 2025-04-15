@@ -1,0 +1,47 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ILiquidationEngine",
+  "sourceName": "contracts/VirtualLiquidationData.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "cParams",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "collateralAuctionHouse",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "liquidationPenalty",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "liquidationQuantity",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ILiquidationEngine.LiquidationEngineCollateralParams",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

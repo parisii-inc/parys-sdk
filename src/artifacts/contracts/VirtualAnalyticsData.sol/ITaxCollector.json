@@ -1,0 +1,47 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ITaxCollector",
+  "sourceName": "contracts/VirtualAnalyticsData.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_cType",
+          "type": "bytes32"
+        }
+      ],
+      "name": "cData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "nextStabilityFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "updateTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "secondaryReceiverAllotedTax",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ITaxCollector.TaxCollectorCollateralData",
+          "name": "_cData",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

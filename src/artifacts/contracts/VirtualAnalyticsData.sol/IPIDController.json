@@ -1,0 +1,84 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IPIDController",
+  "sourceName": "contracts/VirtualAnalyticsData.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "deviationObservation",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "proportional",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "integral",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct IPIDController.DeviationObservation",
+          "name": "__deviationObservation",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "_piOutput",
+          "type": "int256"
+        }
+      ],
+      "name": "getBoundedRedemptionRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_redemptionRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "_proportionalTerm",
+          "type": "int256"
+        },
+        {
+          "internalType": "int256",
+          "name": "_integralTerm",
+          "type": "int256"
+        }
+      ],
+      "name": "getGainAdjustedPIOutput",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "_piOutput",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

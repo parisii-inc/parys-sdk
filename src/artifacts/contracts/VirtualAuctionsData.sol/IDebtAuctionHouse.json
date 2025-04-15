@@ -1,0 +1,46 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IDebtAuctionHouse",
+  "sourceName": "contracts/VirtualAuctionsData.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "params",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "bidDecrease",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountSoldIncrease",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "bidDuration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalAuctionLength",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IDebtAuctionHouse.DebtAuctionHouseParams",
+          "name": "_params",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

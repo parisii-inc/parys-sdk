@@ -1,0 +1,86 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IOracleRelayer",
+  "sourceName": "contracts/VirtualAnalyticsData.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_cType",
+          "type": "bytes32"
+        }
+      ],
+      "name": "cParams",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "contract IDelayedOracle",
+              "name": "oracle",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "safetyCRatio",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "liquidationCRatio",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IOracleRelayer.OracleRelayerCollateralParams",
+          "name": "_cParams",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_marketPrice",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "redemptionPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_redemptionPrice",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "redemptionRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_redemptionRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

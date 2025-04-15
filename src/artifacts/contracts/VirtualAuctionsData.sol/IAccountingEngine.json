@@ -1,0 +1,150 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IAccountingEngine",
+  "sourceName": "contracts/VirtualAuctionsData.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_blockTimestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "debtQueue",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_debtQueue",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "disableTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_disableTimestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lastSurplusTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_lastSurplusTime",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "params",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "surplusIsTransferred",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "surplusDelay",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "popDebtDelay",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "disableCooldown",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "surplusAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "surplusBuffer",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "debtAuctionMintedTokens",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "debtAuctionBidSize",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IAccountingEngine.AccountingEngineParams",
+          "name": "_params",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalOnAuctionDebt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_totalOnAuctionDebt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalQueuedDebt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_totalQueuedDebt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unqueuedUnauctionedDebt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_unqueuedUnauctionedDebt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

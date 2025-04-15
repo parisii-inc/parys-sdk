@@ -1,0 +1,51 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ISurplusAuctionHouse",
+  "sourceName": "contracts/VirtualAuctionsData.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "params",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "bidIncrease",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "bidDuration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalAuctionLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "bidReceiver",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "recyclingPercentage",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ISurplusAuctionHouse.SurplusAuctionHouseParams",
+          "name": "_params",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
