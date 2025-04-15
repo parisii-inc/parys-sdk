@@ -19,12 +19,12 @@ if (!isBrowser) {
         path = require('path')
 
         // We don't need dotenv anymore as we're using fixed paths
-        console.log('[SDK] Running in Node.js environment')
+        //console.log('[SDK] Running in Node.js environment')
     } catch (e) {
         console.warn('[SDK] Node.js modules not available, running in a limited environment')
     }
 } else {
-    console.log('[SDK] Running in browser environment')
+    //console.log('[SDK] Running in browser environment')
 }
 
 // All keys are mandatory
@@ -236,7 +236,7 @@ const tokens: Record<GebDeployment, TokenList> = {
             symbol: 'PEUA',
             label: 'PEUA',
             bytes32String: PEUA,
-            collateralJoin: '0x5f265ae9ce68bc3848a8ffc03af4d51c19d24cb7',
+            collateralJoin: '0xccc5C2c9E7Ad4dAD8E7ee662Bb6CfAf0225bbefc',
             collateralAuctionHouse: '',
             isCollateral: true,
             hasRewards: false,
@@ -247,7 +247,7 @@ const tokens: Record<GebDeployment, TokenList> = {
             symbol: 'PBJO',
             label: 'PBJO',
             bytes32String: '0x50424a4f00000000000000000000000000000000000000000000000000000000',
-            collateralJoin: '0x5f265ae9ce68bc3848a8ffc03af4d51c19d24cb7',
+            collateralJoin: '0xe58a76279d59915ba0F93d840A059e04FfDf6395',
             collateralAuctionHouse: '',
             isCollateral: true,
             hasRewards: false,
@@ -418,7 +418,7 @@ const tokens: Record<GebDeployment, TokenList> = {
 // Helper function for logging with timestamps
 function logWithTime(message: string): void {
     const now = new Date()
-    console.log(`[SDK ${now.toISOString()}] ${message}`)
+    //console.log(`[SDK ${now.toISOString()}] ${message}`)
 }
 
 /**
@@ -427,13 +427,13 @@ function logWithTime(message: string): void {
  */
 function loadLocalContractAddresses(): ContractList | null {
     try {
-        console.log('[SDK] Loading local contract addresses')
+        //console.log('[SDK] Loading local contract addresses')
 
         // In browser environment, use fixed path to public directory
         if (isBrowser) {
             // Standard path for local development
             const filePath = '/data/31337-contracts.json'
-            console.log(`[SDK] Loading contracts from standard path: ${filePath}`)
+            //console.log(`[SDK] Loading contracts from standard path: ${filePath}`)
 
             try {
                 const xhr = new XMLHttpRequest()
@@ -442,7 +442,7 @@ function loadLocalContractAddresses(): ContractList | null {
 
                 if (xhr.status === 200) {
                     const contractAddresses = JSON.parse(xhr.responseText) as ContractList
-                    console.log('[SDK] Successfully loaded contract addresses')
+                    //console.log('[SDK] Successfully loaded contract addresses')
                     return contractAddresses
                 } else {
                     console.error(`[SDK] Failed to load contract addresses: ${xhr.status} ${xhr.statusText}`)
@@ -458,7 +458,7 @@ function loadLocalContractAddresses(): ContractList | null {
             if (fs.existsSync(resolvedPath)) {
                 const fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
                 const contractAddresses = JSON.parse(fileContent) as ContractList
-                console.log(`[SDK] Successfully loaded contract addresses from: ${resolvedPath}`)
+                //console.log(`[SDK] Successfully loaded contract addresses from: ${resolvedPath}`)
                 return contractAddresses
             } else {
                 console.warn(`[SDK] File not found at: ${resolvedPath}`)
@@ -482,13 +482,13 @@ function loadLocalContractAddresses(): ContractList | null {
  */
 function loadLocalTokenList(): TokenList | null {
     try {
-        console.log('[SDK] Loading local token list')
+        //console.log('[SDK] Loading local token list')
 
         // In browser environment, use fixed path to public directory
         if (isBrowser) {
             // Standard path for local development
             const filePath = '/data/31337-tokens.json'
-            console.log(`[SDK] Loading tokens from standard path: ${filePath}`)
+            //console.log(`[SDK] Loading tokens from standard path: ${filePath}`)
 
             try {
                 const xhr = new XMLHttpRequest()
@@ -497,7 +497,7 @@ function loadLocalTokenList(): TokenList | null {
 
                 if (xhr.status === 200) {
                     const tokenList = JSON.parse(xhr.responseText) as TokenList
-                    console.log('[SDK] Successfully loaded token list')
+                    //console.log('[SDK] Successfully loaded token list')
                     return tokenList
                 } else {
                     console.error(`[SDK] Failed to load token list: ${xhr.status} ${xhr.statusText}`)
@@ -513,7 +513,7 @@ function loadLocalTokenList(): TokenList | null {
             if (fs.existsSync(resolvedPath)) {
                 const fileContent = fs.readFileSync(resolvedPath, { encoding: 'utf8' })
                 const tokenList = JSON.parse(fileContent) as TokenList
-                console.log(`[SDK] Successfully loaded token list from: ${resolvedPath}`)
+                //console.log(`[SDK] Successfully loaded token list from: ${resolvedPath}`)
                 return tokenList
             } else {
                 console.warn(`[SDK] File not found at: ${resolvedPath}`)
@@ -533,41 +533,41 @@ function loadLocalTokenList(): TokenList | null {
 
 export const getTokenList = (network: GebDeployment): TokenList => {
     if (network === 'localnet') {
-        console.log('[SDK] Getting tokens for localnet')
+        //console.log('[SDK] Getting tokens for localnet')
 
         // Try to load from local file
         const localTokens = loadLocalTokenList()
         if (localTokens) {
-            console.log('[SDK] Using locally loaded token list')
+            //console.log('[SDK] Using locally loaded token list')
             return localTokens
         }
 
         // If loading fails, use default localnet tokens
-        console.log('[SDK] Using default localnet token list')
+        //console.log('[SDK] Using default localnet token list')
         return tokens.localnet
     }
 
-    console.log(`[SDK] Using ${network} token list`)
+    //console.log(`[SDK] Using ${network} token list`)
     return tokens[network]
 }
 
 export const getAddressList = (network: GebDeployment): ContractList => {
     if (network === 'localnet') {
-        console.log('[SDK] Getting contract addresses for localnet')
+        //console.log('[SDK] Getting contract addresses for localnet')
 
         // Try to load from local file
         const localAddresses = loadLocalContractAddresses()
         if (localAddresses) {
-            console.log('[SDK] Using locally loaded contract addresses')
+            //console.log('[SDK] Using locally loaded contract addresses')
             return localAddresses
         }
 
         // If loading fails, use default localnet addresses
-        console.log('[SDK] Using default localnet contract addresses')
+        //console.log('[SDK] Using default localnet contract addresses')
         return addresses.localnet
     }
 
-    console.log(`[SDK] Using ${network} contract addresses`)
+    //console.log(`[SDK] Using ${network} contract addresses`)
     return addresses[network]
 }
 
@@ -581,14 +581,14 @@ export interface TokenAddresses {
 }
 
 export function debugGetAddresses(networkId: number): any {
-    console.log(`[SDK] Getting addresses for network ID: ${networkId}`)
+    //console.log(`[SDK] Getting addresses for network ID: ${networkId}`)
 
     if (networkId === 31337) {
-        console.log('[SDK] Loading local contract addresses')
+        //console.log('[SDK] Loading local contract addresses')
         const localAddresses = loadLocalContractAddresses()
 
         if (localAddresses) {
-            console.log('[SDK] Successfully loaded local contract addresses')
+            //console.log('[SDK] Successfully loaded local contract addresses')
             return {
                 tokens: debugGetTokenAddresses(networkId),
                 contracts: localAddresses,
@@ -617,14 +617,14 @@ export function debugGetAddresses(networkId: number): any {
 }
 
 export function debugGetTokenAddresses(networkId: number): any {
-    console.log(`[SDK] Getting token addresses for network ID: ${networkId}`)
+    //console.log(`[SDK] Getting token addresses for network ID: ${networkId}`)
 
     if (networkId === 31337) {
-        console.log('[SDK] Loading local token addresses')
+        //console.log('[SDK] Loading local token addresses')
         const localTokens = loadLocalTokenList()
 
         if (localTokens) {
-            console.log('[SDK] Successfully loaded local token list')
+            //console.log('[SDK] Successfully loaded local token list')
             return {
                 tokenList: localTokens,
             }

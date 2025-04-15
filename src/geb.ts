@@ -113,7 +113,7 @@ export class Geb {
         this.provider
             .getNetwork()
             .then((networkInfo) => {
-                console.log(`[SDK] Connected to network ID: ${networkInfo.chainId}`)
+                //console.log(`[SDK] Connected to network ID: ${networkInfo.chainId}`)
 
                 if (networkInfo.chainId === 31337 && network !== 'localnet') {
                     console.log(

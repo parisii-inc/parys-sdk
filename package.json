@@ -1,6 +1,6 @@
 {
   "name": "@parisii-inc/parys-sdk",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Javascript client for PARYS",
   "license": "MIT",
   "exports": {
