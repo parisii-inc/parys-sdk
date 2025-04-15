@@ -235,7 +235,7 @@ const tokens: Record<GebDeployment, TokenList> = {
             decimals: 18,
             symbol: 'PEUA',
             label: 'PEUA',
-            bytes32String: PEUA,
+            bytes32String: '0x5045554100000000000000000000000000000000000000000000000000000000',
             collateralJoin: '0xccc5C2c9E7Ad4dAD8E7ee662Bb6CfAf0225bbefc',
             collateralAuctionHouse: '',
             isCollateral: true,
