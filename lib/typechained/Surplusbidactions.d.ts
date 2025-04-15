@@ -1,0 +1,130 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface SurplusbidactionsInterface extends utils.Interface {
+    functions: {
+        "exitAllSystemCoins(address)": FunctionFragment;
+        "exitCollateral(address,uint256)": FunctionFragment;
+        "exitSystemCoins(address,uint256)": FunctionFragment;
+        "increaseBidSize(address,uint256,uint256)": FunctionFragment;
+        "joinSystemCoins(address,address,uint256)": FunctionFragment;
+        "settleAuction(address,address,uint256)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "exitAllSystemCoins" | "exitCollateral" | "exitSystemCoins" | "increaseBidSize" | "joinSystemCoins" | "settleAuction"): FunctionFragment;
+    encodeFunctionData(functionFragment: "exitAllSystemCoins", values: [string]): string;
+    encodeFunctionData(functionFragment: "exitCollateral", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "exitSystemCoins", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "increaseBidSize", values: [string, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "joinSystemCoins", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "settleAuction", values: [string, string, BigNumberish]): string;
+    decodeFunctionResult(functionFragment: "exitAllSystemCoins", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "exitCollateral", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "exitSystemCoins", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "increaseBidSize", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "joinSystemCoins", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "settleAuction", data: BytesLike): Result;
+    events: {};
+}
+export interface Surplusbidactions extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: SurplusbidactionsInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        exitAllSystemCoins(_coinJoin: string, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+        exitCollateral(_collateralJoin: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+        exitSystemCoins(_coinJoin: string, _coinsToExit: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+        increaseBidSize(_surplusAuctionHouse: string, _auctionId: BigNumberish, _bidAmount: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+        joinSystemCoins(_coinJoin: string, _dst: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+        settleAuction(_coinJoin: string, _surplusAuctionHouse: string, _auctionId: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<ContractTransaction>;
+    };
+    exitAllSystemCoins(_coinJoin: string, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    exitCollateral(_collateralJoin: string, _wad: BigNumberish, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    exitSystemCoins(_coinJoin: string, _coinsToExit: BigNumberish, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    increaseBidSize(_surplusAuctionHouse: string, _auctionId: BigNumberish, _bidAmount: BigNumberish, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    joinSystemCoins(_coinJoin: string, _dst: string, _wad: BigNumberish, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    settleAuction(_coinJoin: string, _surplusAuctionHouse: string, _auctionId: BigNumberish, overrides?: Overrides & {
+        from?: string;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        exitAllSystemCoins(_coinJoin: string, overrides?: CallOverrides): Promise<void>;
+        exitCollateral(_collateralJoin: string, _wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        exitSystemCoins(_coinJoin: string, _coinsToExit: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        increaseBidSize(_surplusAuctionHouse: string, _auctionId: BigNumberish, _bidAmount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        joinSystemCoins(_coinJoin: string, _dst: string, _wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        settleAuction(_coinJoin: string, _surplusAuctionHouse: string, _auctionId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {};
+    estimateGas: {
+        exitAllSystemCoins(_coinJoin: string, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+        exitCollateral(_collateralJoin: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+        exitSystemCoins(_coinJoin: string, _coinsToExit: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+        increaseBidSize(_surplusAuctionHouse: string, _auctionId: BigNumberish, _bidAmount: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+        joinSystemCoins(_coinJoin: string, _dst: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+        settleAuction(_coinJoin: string, _surplusAuctionHouse: string, _auctionId: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        exitAllSystemCoins(_coinJoin: string, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+        exitCollateral(_collateralJoin: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+        exitSystemCoins(_coinJoin: string, _coinsToExit: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+        increaseBidSize(_surplusAuctionHouse: string, _auctionId: BigNumberish, _bidAmount: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+        joinSystemCoins(_coinJoin: string, _dst: string, _wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+        settleAuction(_coinJoin: string, _surplusAuctionHouse: string, _auctionId: BigNumberish, overrides?: Overrides & {
+            from?: string;
+        }): Promise<PopulatedTransaction>;
+    };
+}
